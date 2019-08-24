@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">GastosPessoais</string>
+    <string name="disponivel">Disponível</string>
+    <string name="gastos">Gastos</string>
+    <string name="receita">Receita</string>
+    <string name="menu_receitas">Receitas</string>
+    <string name="menu_gastos">Gastos</string>
+    <string name="descricao">Descrição</string>
+    <string name="valor">Valor</string>
+    <string name="data">Data</string>
+    <string name="categoria">Categoria</string>
+    <string name="inserirGastos">Inserir Gastos</string>
+    <string name="salvar">Salvar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="inserirItens">Inserir Itens</string>
+    <string name="semTipo">Sem tipo</string>
+    <string name="deseja_apagar">Deseja apagar</string>
+</resources>
