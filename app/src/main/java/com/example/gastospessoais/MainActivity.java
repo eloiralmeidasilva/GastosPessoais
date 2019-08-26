@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 tipoItem = getString(R.string.gastos);
 
                 intent.putExtra(ItensActivity.KEY_TIPO, tipoItem);
-
+                ItensActivity.nova(this, REQUEST_NOVO_ITEM);
                 startActivity(intent);
 
                 return true;
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 tipoItem = getString(R.string.receita);
 
                 intent.putExtra(ItensActivity.KEY_TIPO, tipoItem);
-
+                ItensActivity.nova(this, REQUEST_NOVO_ITEM);
                 startActivity(intent);
 
                 return true;
