@@ -114,6 +114,7 @@ public class ItemDao {
     public void carregarTudo(){
 
         lista.clear();
+        ArrayList listaItens = new ArrayList();
 
         String sql = "SELECT * FROM " + TABELA + " ORDER BY " + DESCRICAO;
 
@@ -145,6 +146,7 @@ public class ItemDao {
 
             lista.add(item);
         }
+
 
         cursor.close();
 

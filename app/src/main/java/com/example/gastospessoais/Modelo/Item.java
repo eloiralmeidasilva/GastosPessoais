@@ -12,7 +12,16 @@ public class Item {
     private String  categoria;
     private String  descricao;
     private String  tipo;
+    private String tipoRetorno;
 
+
+    public String getTipoRetorno() {
+        return tipoRetorno;
+    }
+
+    public void setTipoRetorno(String tipoRetorno) {
+        this.tipoRetorno = tipoRetorno;
+    }
 
     public Long getId() {
         return id;

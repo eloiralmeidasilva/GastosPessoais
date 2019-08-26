@@ -48,9 +48,14 @@ public class MainActivity extends AppCompatActivity {
         ItensDataBase database = ItensDataBase.getInstance(this);
         database.itemDao.carregarTudo();
 
+        textViewDisponivel = findViewById(R.id.textViewDisponivel);
+        textViewGastos = findViewById(R.id.textViewGastos);
+        textViewReceita = findViewById(R.id.textViewReceita);
         listViewItens = findViewById(R.id.listaItens);
 
-        listViewItens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+ /*       listViewItens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -61,16 +66,9 @@ public class MainActivity extends AppCompatActivity {
                                         item);
             }
         });
+*/
 
-        popularLista();
-
-        registerForContextMenu(listViewItens);
-
-        textViewDisponivel = findViewById(R.id.textViewDisponivel);
-        textViewGastos = findViewById(R.id.textViewGastos);
-        textViewReceita = findViewById(R.id.textViewReceita);
-        listViewItens = findViewById(R.id.listaItens);
-
+/*
         Intent intentRetorno = getIntent();
         Bundle bundleRetorno = intentRetorno.getExtras();
 
@@ -83,10 +81,11 @@ public class MainActivity extends AppCompatActivity {
             String tipo = bundleRetorno.getString(TIPO_RETORNO, TIPO_RETORNO);
 
         }
-
+*/
 
         popularLista();
 
+        registerForContextMenu(listViewItens);
 
     }
 

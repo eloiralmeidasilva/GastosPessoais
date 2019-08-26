@@ -73,7 +73,7 @@ public class ItensActivity extends AppCompatActivity {
 
         if (bundle != null) {
 
-            tipo_retorno = bundle.getString(KEY_TIPO, getString(R.string.semTipo));
+            tipo_retorno = bundle.getString(KEY_TIPO, KEY_TIPO);
 
         }
     }
