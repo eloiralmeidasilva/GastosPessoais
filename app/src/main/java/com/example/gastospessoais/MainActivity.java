@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         popularLista();
 
-        registerForContextMenu(listViewItens);
+        registerForContextMenu(listViewItens);  // indica que o listView vai ter o menu de contexto se segurar clicado
 
     }
 
@@ -113,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
         listViewItens.setAdapter(adapter);
 
     }
-/*
-    private void excluirPessoa(final Item item){
+
+    private void excluirItem(final Item item){
 
         String mensagem = getString(R.string.deseja_apagar) + "\n" + item.getDescricao();
 
@@ -144,7 +145,43 @@ public class MainActivity extends AppCompatActivity {
         //UtilsGUI.confirmaAcao(this, mensagem, listener);
     }
 
-*/
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        getMenuInflater().inflate(R.menu.principal_menu_contexto, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info;
+
+        info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        Item itemClasse = adapter.getItem(info.position);
+
+        switch(item.getItemId()){
+
+            case R.id.alterar:
+                ItensActivity.alterar(this,
+                        REQUEST_ALTERAR_ITEM,
+                        itemClasse);
+                return true;
+
+            case R.id.excluir:
+                excluirItem(itemClasse);
+                return true;
+
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
+
+
     //MENU
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

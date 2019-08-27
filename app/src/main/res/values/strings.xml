@@ -15,4 +15,6 @@
     <string name="inserirItens">Inserir Itens</string>
     <string name="semTipo">Sem tipo</string>
     <string name="deseja_apagar">Deseja apagar</string>
+    <string name="menu_alterar">Alterar</string>
+    <string name="menu_excluir">Excluir</string>
 </resources>
