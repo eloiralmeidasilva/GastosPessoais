@@ -154,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.alterar:
                 ItensActivity.alterar(this,
+                        itemClasse.getTipo(),
                         REQUEST_ALTERAR_ITEM,
                         itemClasse);
                 return true;
@@ -187,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                 tipoItem = getString(R.string.gastos);
 
                 intent.putExtra(ItensActivity.KEY_TIPO, tipoItem);
-                ItensActivity.nova(this, REQUEST_NOVO_ITEM);
+                ItensActivity.nova(this, tipoItem, REQUEST_NOVO_ITEM);
                 //startActivity(intent);
 
                 return true;
@@ -196,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
                 tipoItem = getString(R.string.receita);
 
                 intent.putExtra(ItensActivity.KEY_TIPO, tipoItem);
-                ItensActivity.nova(this, REQUEST_NOVO_ITEM);
+                ItensActivity.nova(this, tipoItem, REQUEST_NOVO_ITEM);
                 startActivity(intent);
 
                 return true;

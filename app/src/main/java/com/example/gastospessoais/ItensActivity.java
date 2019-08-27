@@ -32,9 +32,10 @@ public class ItensActivity extends AppCompatActivity {
     public static final int    ALTERAR     = 2;
 
     public static String tipo_retorno;
+    public static String tipo_retorno_alterar;
     private int modo;
 
-    public static void nova(Activity activity, int requestCode){
+    public static void nova(Activity activity, String tipoAlt, int requestCode){
 
         Intent intent = new Intent(activity, ItensActivity.class);
 
@@ -43,10 +44,10 @@ public class ItensActivity extends AppCompatActivity {
         activity.startActivityForResult(intent, requestCode);
     }
 
-    public static void alterar(Activity activity, int requestCode, Item item){
+    public static void alterar(Activity activity, String tipoAlt, int requestCode, Item item){
 
         Intent intent = new Intent(activity, ItensActivity.class);
-
+        tipo_retorno_alterar = tipoAlt;
         intent.putExtra(MODO, ALTERAR);
         intent.putExtra(ID, item.getId());
 
@@ -77,7 +78,8 @@ public class ItensActivity extends AppCompatActivity {
 
             tipo_retorno = bundle.getString(KEY_TIPO, KEY_TIPO);
 
-            if(!tipo_retorno.equals("")){
+            if(!tipo_retorno.equals("TIPO")){
+                tipo_retorno_alterar = "";
                 modo = NOVO;
 
             }else{
@@ -100,6 +102,8 @@ public class ItensActivity extends AppCompatActivity {
                 else{
 
                     setTitle(R.string.novo_item);
+
+                    tipo_retorno_alterar = "";
 
                     item = new Item("");
                 }
@@ -153,18 +157,18 @@ public class ItensActivity extends AppCompatActivity {
             item.setCategoria(categoria);
         }
 
-        intent.putExtra(MainActivity.TIPO_RETORNO , tipo_retorno);
-        item.setTipo(tipo_retorno);
-
 
         ItensDataBase database = ItensDataBase.getInstance(this);
 
         if (modo == ALTERAR){
+            intent.putExtra(MainActivity.TIPO_RETORNO , tipo_retorno_alterar);
+            item.setTipo(tipo_retorno_alterar);
 
             database.itemDao.alterar(item);
 
         }else{
-
+            intent.putExtra(MainActivity.TIPO_RETORNO, tipo_retorno);
+            item.setTipo(tipo_retorno);
 
             database.itemDao.inserir(item);
         }
