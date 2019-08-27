@@ -59,10 +59,6 @@ public class ItemDao {
         ContentValues values = new ContentValues();
 
         values.put(VALOR, item.getValor());
-        //Date data = Calendar.getInstance();
-        //String convertDate = String.valueOf(item.getData());
-        //DateFormat dateFormat =  new  SimpleDateFormat ( "dd/mm/aaaa" );
-        //String strDate = dateFormat.format (item.getData());
         values.put(DATA, String.valueOf(item.getData().getTime()));
         values.put(CATEGORIA, item.getCategoria());
         values.put(DESCRICAO, item.getDescricao());
@@ -83,12 +79,13 @@ public class ItemDao {
     public boolean alterar(Item item){
 
         ContentValues values = new ContentValues();
+        String tipo = item.getTipo();
 
         values.put(VALOR,  item.getValor());
         values.put(DATA, String.valueOf(item.getData().getTime()));
         values.put(CATEGORIA,  item.getCategoria());
         values.put(DESCRICAO,  item.getDescricao());
-        values.put(TIPO,  item.getTipo());
+        values.put(TIPO,  tipo);
 
 
         String[] args = {String.valueOf(item.getId())};
@@ -175,7 +172,7 @@ public class ItemDao {
 
     }
 
-    public Item pessoaPorId(long id){
+    public Item itemPorId(long id){
 
         for (Item p: lista){
 

@@ -71,14 +71,42 @@ public class ItensActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-
         Bundle bundle = intent.getExtras();
 
         if (bundle != null) {
 
             tipo_retorno = bundle.getString(KEY_TIPO, KEY_TIPO);
 
+            if(!tipo_retorno.equals("")){
+                modo = NOVO;
+
+            }else{
+                modo = bundle.getInt(MODO);
+
+                if (modo == ALTERAR){
+
+                    setTitle(R.string.alterar_item);
+
+                    long id = bundle.getLong(ID);
+
+                    ItensDataBase database = ItensDataBase.getInstance(this);
+
+                    item = database.itemDao.itemPorId(id);
+
+                    editTextDescricao.setText(item.getDescricao());
+                    editTextValor.setText(item.getValor().toString());
+                    editTextCategoria.setText(item.getCategoria());
+                }
+                else{
+
+                    setTitle(R.string.novo_item);
+
+                    item = new Item("");
+                }
+
+            }
         }
+
     }
 
     public void salvar(View view){
@@ -131,15 +159,15 @@ public class ItensActivity extends AppCompatActivity {
 
         ItensDataBase database = ItensDataBase.getInstance(this);
 
-        //if (modo == NOVO){
+        if (modo == ALTERAR){
+
+            database.itemDao.alterar(item);
+
+        }else{
+
 
             database.itemDao.inserir(item);
-
-        //}else{
-
-
-          //  database.itemDao.alterar(item);
-        //}
+        }
 
         setResult(Activity.RESULT_OK);
         finish();

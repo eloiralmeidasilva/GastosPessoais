@@ -22,6 +22,15 @@ public class Item {
     private int dia;
 
 
+    public Item() {
+
+    }
+
+    public Item(String s) {
+
+    }
+
+
     public Long getAno() {
         return ano;
     }

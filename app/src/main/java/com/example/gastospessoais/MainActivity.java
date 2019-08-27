@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.gastospessoais.Dao.ItensDataBase;
 import com.example.gastospessoais.Modelo.Item;
+import com.example.gastospessoais.Utils.UtilsGUI;
 
 import java.util.ArrayList;
 
@@ -67,21 +68,6 @@ public class MainActivity extends AppCompatActivity {
                                         item);
             }
         });
-*/
-
-/*
-        Intent intentRetorno = getIntent();
-        Bundle bundleRetorno = intentRetorno.getExtras();
-
-        if (bundleRetorno != null) {
-
-            String descricao = bundleRetorno.getString(DESCRICAO, DESCRICAO);
-            String valor = bundleRetorno.getString(VALOR, VALOR);
-            String data = bundleRetorno.getString(DATA, DATA);
-            String categoria = bundleRetorno.getString(CATEGORIA, CATEGORIA);
-            String tipo = bundleRetorno.getString(TIPO_RETORNO, TIPO_RETORNO);
-
-        }
 */
 
         popularLista();
@@ -142,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 };
 
-        //UtilsGUI.confirmaAcao(this, mensagem, listener);
+        UtilsGUI.confirmaAcao(this, mensagem, listener);
     }
 
 
@@ -202,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
                 intent.putExtra(ItensActivity.KEY_TIPO, tipoItem);
                 ItensActivity.nova(this, REQUEST_NOVO_ITEM);
-                startActivity(intent);
+                //startActivity(intent);
 
                 return true;
 
