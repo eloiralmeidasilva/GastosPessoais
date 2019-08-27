@@ -10,9 +10,11 @@ import android.widget.EditText;
 
 import com.example.gastospessoais.Dao.ItensDataBase;
 import com.example.gastospessoais.Modelo.Item;
+import com.example.gastospessoais.Utils.MascaraEdicao;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class ItensActivity extends AppCompatActivity {
@@ -26,8 +28,8 @@ public class ItensActivity extends AppCompatActivity {
     public static String        KEY_TIPO    = "TIPO";
     private static final String MODO        = "MODO";
     private static final String ID          = "ID";
-    private static final int    NOVO        = 1;
-    private static final int    ALTERAR     = 2;
+    public static final int    NOVO        = 1;
+    public static final int    ALTERAR     = 2;
 
     public static String tipo_retorno;
     private int modo;
@@ -64,6 +66,7 @@ public class ItensActivity extends AppCompatActivity {
         editTextDescricao = findViewById(R.id.editTextDescricao);
         editTextValor = findViewById(R.id.editTextValor);
         editTextData = findViewById(R.id.editTextData);
+        editTextData.addTextChangedListener(MascaraEdicao.mask(editTextData, MascaraEdicao.FORMAT_DATE));
         editTextCategoria = findViewById(R.id.editTextCategoria);
 
 
@@ -80,6 +83,7 @@ public class ItensActivity extends AppCompatActivity {
 
     public void salvar(View view){
 
+        item = new Item();
 
         Intent intent = new Intent(this,
                                     MainActivity.class);
@@ -102,10 +106,17 @@ public class ItensActivity extends AppCompatActivity {
         if(!data.equals("")){
 
             intent.putExtra(MainActivity.DATA , data);
+            //Date dateString = MascaraEdicao.getDate(Long.parseLong(data), "dd/MM/yyyy");
+
             ParsePosition pos = new ParsePosition(0);
-            SimpleDateFormat simpledateformat = new SimpleDateFormat("d MMM yyyy");
-            Date stringDate = simpledateformat.parse(data, pos);
-            item.setData(stringDate);
+            SimpleDateFormat simpledateformat = new SimpleDateFormat("dd/MM/yyyy");
+            long stringDate = simpledateformat.parse(data, pos).getTime();
+
+            //String dateString = stringDate;
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(stringDate);
+            Date dataDate = calendar.getTime();
+            item.setData(dataDate);
 
         }
         if(!categoria.equals("")){
@@ -120,15 +131,15 @@ public class ItensActivity extends AppCompatActivity {
 
         ItensDataBase database = ItensDataBase.getInstance(this);
 
-        if (modo == NOVO){
+        //if (modo == NOVO){
 
             database.itemDao.inserir(item);
 
-        }else{
+        //}else{
 
 
-            database.itemDao.alterar(item);
-        }
+          //  database.itemDao.alterar(item);
+        //}
 
         setResult(Activity.RESULT_OK);
         finish();

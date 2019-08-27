@@ -2,6 +2,10 @@ package com.example.gastospessoais.Modelo;
 
 import android.widget.EditText;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Item {
@@ -13,7 +17,34 @@ public class Item {
     private String  descricao;
     private String  tipo;
     private String tipoRetorno;
+    private Long ano;
+    private int mes;
+    private int dia;
 
+
+    public Long getAno() {
+        return ano;
+    }
+
+    public void setAno(long ano) {
+        this.ano = ano;
+    }
+
+    public int getMes() {
+        return mes;
+    }
+
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public int getDia() {
+        return dia;
+    }
+
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
 
     public String getTipoRetorno() {
         return tipoRetorno;
@@ -70,4 +101,20 @@ public class Item {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+    @Override
+    public String toString(){
+        return getTipo() + " - " + FormatarData(getData()) + " -- " + getDia() + "/" +getMes() + "/" + getAno() + " - " + getDescricao() + " - " + getValor();
+    }
+
+    public static Date FormatarData(Date data) {
+        //DateFormat f = DateFormat.getDateInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+            sdf.format(data);
+
+        return data;
+    }
+
+
 }

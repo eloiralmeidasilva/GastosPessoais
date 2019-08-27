@@ -6,9 +6,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.gastospessoais.Modelo.Item;
 
+import java.text.DateFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +39,7 @@ public class ItemDao {
         String sql =        "CREATE TABLE " + TABELA + "(" +
                 ID    +     " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 VALOR  +    " FLOAT NOT NULL, " +
-                DATA +      " DATE, " +
+                DATA +      " INTEGER, " +
                 CATEGORIA + " CHAR, " +
                 DESCRICAO + " CHAR, " +
                 TIPO +      " CHAR) ";
@@ -57,8 +59,11 @@ public class ItemDao {
         ContentValues values = new ContentValues();
 
         values.put(VALOR, item.getValor());
-        String convertDate = String.valueOf(item.getData());
-        values.put(DATA, convertDate);
+        //Date data = Calendar.getInstance();
+        //String convertDate = String.valueOf(item.getData());
+        //DateFormat dateFormat =  new  SimpleDateFormat ( "dd/mm/aaaa" );
+        //String strDate = dateFormat.format (item.getData());
+        values.put(DATA, String.valueOf(item.getData().getTime()));
         values.put(CATEGORIA, item.getCategoria());
         values.put(DESCRICAO, item.getDescricao());
         values.put(TIPO, item.getTipo());
@@ -80,8 +85,7 @@ public class ItemDao {
         ContentValues values = new ContentValues();
 
         values.put(VALOR,  item.getValor());
-        String convertDate = String.valueOf(item.getData());
-        values.put(DATA, convertDate);
+        values.put(DATA, String.valueOf(item.getData().getTime()));
         values.put(CATEGORIA,  item.getCategoria());
         values.put(DESCRICAO,  item.getDescricao());
         values.put(TIPO,  item.getTipo());
@@ -131,17 +135,35 @@ public class ItemDao {
 
             Item item = new Item();
 
-            item.setDescricao(cursor.getString(colunaDescricao));
+            item.setTipo(cursor.getString(colunaTipo));
+/*
+            String dateString = cursor.getString(colunaData);
+            ParsePosition pos = new ParsePosition(0);
+            SimpleDateFormat simpledateformat = new SimpleDateFormat("dd/MM/yyyy");
+            long stringDate = simpledateformat.parse(dateString, pos).getTime();
+
+            //String dateString = stringDate;
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(stringDate);
+            Date dataDate = calendar.getTime();
+            item.setData(dataDate);
+*/
+
+            String dateString = cursor.getString(colunaData);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(Long.parseLong(dateString));
+            Date data = calendar.getTime();
+            Long ano = Long.valueOf(data.getYear());
+            int mes = (data.getMonth()+1);
+            int dia = data.getDay();
+            item.setAno(ano);
+            item.setMes(mes);
+            item.setDia(dia);
+            item.setData(data);
 
             item.setId(cursor.getLong(colunaId));
-            item.setValor(cursor.getFloat(colunaValor));
-            String dateString = cursor.getString(colunaData);
-
-            ParsePosition pos = new ParsePosition(0);
-            SimpleDateFormat simpledateformat = new SimpleDateFormat("d MMM yyyy");
-            Date stringDate = simpledateformat.parse(dateString, pos);
-            item.setData(stringDate);
             item.setDescricao(cursor.getString(colunaDescricao));
+            item.setValor(cursor.getFloat(colunaValor));
             item.setCategoria(cursor.getString(colunaCategoria));
 
             lista.add(item);
