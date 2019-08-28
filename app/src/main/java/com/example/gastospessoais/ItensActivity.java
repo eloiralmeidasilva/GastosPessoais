@@ -35,19 +35,19 @@ public class ItensActivity extends AppCompatActivity {
     public static String tipo_retorno_alterar;
     private int modo;
 
-    public static void nova(Activity activity, String tipoAlt, int requestCode){
+    public static void nova(Activity activity, String tipoItem, int requestCode){
 
         Intent intent = new Intent(activity, ItensActivity.class);
-
+        tipo_retorno = tipoItem;
         intent.putExtra(MODO, NOVO);
 
         activity.startActivityForResult(intent, requestCode);
     }
 
-    public static void alterar(Activity activity, String tipoAlt, int requestCode, Item item){
+    public static void alterar(Activity activity, String tipoItem, int requestCode, Item item){
 
         Intent intent = new Intent(activity, ItensActivity.class);
-        tipo_retorno_alterar = tipoAlt;
+        tipo_retorno_alterar = tipoItem;
         intent.putExtra(MODO, ALTERAR);
         intent.putExtra(ID, item.getId());
 
@@ -87,7 +87,7 @@ public class ItensActivity extends AppCompatActivity {
 
                 if (modo == ALTERAR){
 
-                    setTitle(R.string.alterar_item);
+                    setTitle(R.string.alterar_item + tipo_retorno_alterar);
 
                     long id = bundle.getLong(ID);
 
@@ -101,7 +101,7 @@ public class ItensActivity extends AppCompatActivity {
                 }
                 else{
 
-                    setTitle(R.string.novo_item);
+                    setTitle(R.string.novo_item + tipo_retorno);
 
                     tipo_retorno_alterar = "";
 

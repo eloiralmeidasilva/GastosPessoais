@@ -22,6 +22,6 @@
     <string name="confirmacao">Confirmacao</string>
     <string name="sim">Sim</string>
     <string name="nao">Nao</string>
-    <string name="alterar_item">Alterar Item</string>
-    <string name="novo_item">Novo Item</string>
+    <string name="alterar_item">"Alterar "</string>
+    <string name="novo_item">"Novo "</string>
 </resources>

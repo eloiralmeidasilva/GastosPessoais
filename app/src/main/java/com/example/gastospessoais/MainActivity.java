@@ -16,8 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.gastospessoais.Dao.ItemDao;
 import com.example.gastospessoais.Dao.ItensDataBase;
 import com.example.gastospessoais.Modelo.Item;
+import com.example.gastospessoais.Modelo.Valores;
 import com.example.gastospessoais.Utils.UtilsGUI;
 
 import java.util.ArrayList;
@@ -55,9 +57,13 @@ public class MainActivity extends AppCompatActivity {
         textViewReceita = findViewById(R.id.textViewReceita);
         listViewItens = findViewById(R.id.listaItens);
 
+        atualizarVal();
+        popularLista();
+
+        registerForContextMenu(listViewItens);  // indica que o listView vai ter o menu de contexto se segurar clicado
 
 
- /*       listViewItens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+         /*       listViewItens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -69,11 +75,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 */
-
-        popularLista();
-
-        registerForContextMenu(listViewItens);  // indica que o listView vai ter o menu de contexto se segurar clicado
-
     }
 
 
@@ -87,6 +88,17 @@ public class MainActivity extends AppCompatActivity {
 
             adapter.notifyDataSetChanged();
         }
+    }
+
+    private void atualizarVal(){
+
+        ItensDataBase database = ItensDataBase.getInstance(this);
+        database.itemDao.atualizarValores();
+
+        textViewDisponivel.setText(database.itemDao.disponivel.toString());
+        textViewGastos.setText(database.itemDao.gastos.toString());
+        textViewReceita.setText(database.itemDao.receita.toString());
+
     }
 
     private void popularLista(){
@@ -189,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
 
                 intent.putExtra(ItensActivity.KEY_TIPO, tipoItem);
                 ItensActivity.nova(this, tipoItem, REQUEST_NOVO_ITEM);
-                //startActivity(intent);
+                startActivity(intent);
 
                 return true;
 

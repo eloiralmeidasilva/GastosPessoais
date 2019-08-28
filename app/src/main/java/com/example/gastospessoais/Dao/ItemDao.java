@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.gastospessoais.Modelo.Item;
+import com.example.gastospessoais.Modelo.Valores;
 
 import java.text.DateFormat;
 import java.text.ParsePosition;
@@ -24,10 +25,15 @@ public class ItemDao {
     public static final String CATEGORIA    = "CATEGORIA";
     public static final String TIPO         = "TIPO";
     public static final String ID           = "ID";
-
+    public static final String GASTOS       = "Gastos";
+    public static final String RECEITA      = "Receita";
 
     private ItensDataBase conexao;
     public List<Item> lista;
+
+    public Float receita;
+    public Float gastos;
+    public Float disponivel;
 
     public ItemDao(ItensDataBase itensDatabase){
         conexao = itensDatabase;
@@ -53,6 +59,41 @@ public class ItemDao {
 
         database.execSQL(sql);
     }
+
+
+    public void atualizarValores(){
+
+        String sqlR = "SELECT sum(valor) as Receita FROM " + TABELA + " WHERE TIPO = 'Receita' and valor is not null " ;
+        String sqlG = "SELECT sum(valor) as Gastos FROM " + TABELA + " WHERE TIPO = 'Gastos' and valor is not null " ;
+
+        Cursor cursor = conexao.getReadableDatabase().rawQuery(sqlR, null);
+        Cursor cursor2 = conexao.getReadableDatabase().rawQuery(sqlG, null);
+
+        int colunaReceita  = cursor.getColumnIndex(RECEITA);
+        int colunaGastos  = cursor2.getColumnIndex(GASTOS);
+
+        Valores valores = new Valores();
+
+        while(cursor.moveToNext()) {
+
+            valores.setReceita(cursor.getFloat(colunaReceita));
+            receita = valores.getReceita();
+
+        }
+            cursor.close();
+
+        while(cursor2.moveToNext()) {
+
+            valores.setGastos(cursor2.getFloat(colunaGastos));
+            gastos = valores.getGastos();
+            valores.setDisponivel(valores.getReceita() - valores.getGastos());
+            disponivel = valores.getDisponivel();
+
+        }
+        cursor2.close();
+    }
+
+
 
     public boolean inserir(Item item){
 
