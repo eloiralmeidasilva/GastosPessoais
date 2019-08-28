@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GastosPessoais</string>
+    <string name="alterar_item">"Alterar "</string>
+    <string name="aviso">Aviso</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="categoria">Categoria</string>
+    <string name="confirmacao">Confirmação</string>
+    <string name="data">Data</string>
+    <string name="descricao">Descrição</string>
+    <string name="deseja_apagar">Deseja apagar</string>
+    <string name="disponivel">Disponível</string>
+    <string name="gastos">Gastos</string>
+    <string name="inserirGastos">Inserir Gastos</string>
+    <string name="inserirItens">Inserir Itens</string>
+    <string name="menu_alterar">Alterar</string>
+    <string name="menu_excluir">Excluir</string>
+    <string name="menu_gastos">Gastos</string>
+    <string name="nao">Não</string>
+    <string name="menu_receitas">Receitas</string>
+    <string name="novo_item">"Novo "</string>
+    <string name="ok">OK</string>
+    <string name="receita">Receita</string>
+    <string name="salvar">Salvar</string>
+    <string name="semTipo">Sem tipo</string>
+    <string name="sim">Sim</string>
+    <string name="valor">Valor</string>
+</resources>
