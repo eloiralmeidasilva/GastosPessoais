@@ -1,12 +1,13 @@
 package com.example.gastospessoais.Modelo;
 
+import android.text.format.DateFormat;
 import android.widget.EditText;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Item {
 
@@ -113,16 +114,8 @@ public class Item {
 
     @Override
     public String toString(){
-        return getTipo() + " - " + FormatarData(getData()) + " -- " + getDia() + "/" +getMes() + "/" + getAno() + " - " + getDescricao() + " - " + getValor();
-    }
 
-    public static Date FormatarData(Date data) {
-        //DateFormat f = DateFormat.getDateInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-            sdf.format(data);
-
-        return data;
+        return tipo + " - " + DateFormat.format("dd/MM/yyyy", data).toString() + " - " + descricao + " - " + valor;
     }
 
 

@@ -141,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
                 };
 
         UtilsGUI.confirmaAcao(this, mensagem, listener);
+
+        atualizarVal();
     }
 
 

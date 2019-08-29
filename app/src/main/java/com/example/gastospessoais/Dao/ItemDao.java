@@ -150,6 +150,8 @@ public class ItemDao {
                 args);
         lista.remove(item);
 
+
+
         return true;
     }
 
@@ -187,16 +189,10 @@ public class ItemDao {
             item.setData(dataDate);
 */
 
-            String dateString = cursor.getString(colunaData);
+            long dateLong = cursor.getLong(colunaData);
             Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(Long.parseLong(dateString));
+            calendar.setTimeInMillis(dateLong);
             Date data = calendar.getTime();
-            Long ano = Long.valueOf(data.getYear());
-            int mes = (data.getMonth()+1);
-            int dia = data.getDay();
-            item.setAno(ano);
-            item.setMes(mes);
-            item.setDia(dia);
             item.setData(data);
 
             item.setId(cursor.getLong(colunaId));
