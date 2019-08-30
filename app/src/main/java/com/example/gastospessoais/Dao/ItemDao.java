@@ -150,9 +150,8 @@ public class ItemDao {
                 args);
         lista.remove(item);
 
-
-
         return true;
+
     }
 
     public void carregarTudo(){
@@ -176,18 +175,6 @@ public class ItemDao {
             Item item = new Item();
 
             item.setTipo(cursor.getString(colunaTipo));
-/*
-            String dateString = cursor.getString(colunaData);
-            ParsePosition pos = new ParsePosition(0);
-            SimpleDateFormat simpledateformat = new SimpleDateFormat("dd/MM/yyyy");
-            long stringDate = simpledateformat.parse(dateString, pos).getTime();
-
-            //String dateString = stringDate;
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(stringDate);
-            Date dataDate = calendar.getTime();
-            item.setData(dataDate);
-*/
 
             long dateLong = cursor.getLong(colunaData);
             Calendar calendar = Calendar.getInstance();

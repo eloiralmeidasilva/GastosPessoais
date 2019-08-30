@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.EditText;
 
@@ -76,14 +77,7 @@ public class ItensActivity extends AppCompatActivity {
 
         if (bundle != null) {
 
-            tipo_retorno = bundle.getString(KEY_TIPO, KEY_TIPO);
-
-            if(!tipo_retorno.equals("TIPO")){
-                tipo_retorno_alterar = "";
-                modo = NOVO;
-
-            }else{
-                modo = bundle.getInt(MODO);
+            modo = bundle.getInt(MODO);
 
                 if (modo == ALTERAR){
 
@@ -98,27 +92,25 @@ public class ItensActivity extends AppCompatActivity {
                     editTextDescricao.setText(item.getDescricao());
                     editTextValor.setText(item.getValor().toString());
                     editTextCategoria.setText(item.getCategoria());
+                    editTextData.setText(DateFormat.format("dd/MM/yyyy", item.getData()).toString());
                 }
                 else{
 
                     setTitle(R.string.novo_item + tipo_retorno);
+                    item = new Item();
 
-                    tipo_retorno_alterar = "";
-
-                    item = new Item("");
                 }
 
             }
         }
 
-    }
-
     public void salvar(View view){
 
-        item = new Item();
+        if(item == null) {
 
-        Intent intent = new Intent(this,
-                                    MainActivity.class);
+            item = new Item();
+        }
+
         String descricao = editTextDescricao.getText().toString();
         String valor = editTextValor.getText().toString();
         String data = editTextData.getText().toString();
@@ -126,25 +118,18 @@ public class ItensActivity extends AppCompatActivity {
 
         if(!descricao.equals("")){
 
-            intent.putExtra(MainActivity.DESCRICAO , descricao);
             item.setDescricao(descricao);
         }
 
         if(!valor.equals("")){
 
-            intent.putExtra(MainActivity.VALOR , valor);
             item.setValor(Float.parseFloat(valor));
         }
         if(!data.equals("")){
 
-            intent.putExtra(MainActivity.DATA , data);
-            //Date dateString = MascaraEdicao.getDate(Long.parseLong(data), "dd/MM/yyyy");
-
             ParsePosition pos = new ParsePosition(0);
             SimpleDateFormat simpledateformat = new SimpleDateFormat("dd/MM/yyyy");
             long stringDate = simpledateformat.parse(data, pos).getTime();
-
-            //String dateString = stringDate;
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(stringDate);
             Date dataDate = calendar.getTime();
@@ -153,7 +138,6 @@ public class ItensActivity extends AppCompatActivity {
         }
         if(!categoria.equals("")){
 
-            intent.putExtra(MainActivity.CATEGORIA , categoria);
             item.setCategoria(categoria);
         }
 
@@ -161,23 +145,18 @@ public class ItensActivity extends AppCompatActivity {
         ItensDataBase database = ItensDataBase.getInstance(this);
 
         if (modo == ALTERAR){
-            intent.putExtra(MainActivity.TIPO_RETORNO , tipo_retorno_alterar);
-            item.setTipo(tipo_retorno_alterar);
 
+            item.setTipo(tipo_retorno_alterar);
             database.itemDao.alterar(item);
 
         }else{
-            intent.putExtra(MainActivity.TIPO_RETORNO, tipo_retorno);
-            item.setTipo(tipo_retorno);
 
+            item.setTipo(tipo_retorno);
             database.itemDao.inserir(item);
         }
 
         setResult(Activity.RESULT_OK);
         finish();
-
-
-        startActivity(intent);
 
     }
 

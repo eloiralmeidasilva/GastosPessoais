@@ -131,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
                                 database.itemDao.apagar(item);
 
                                 adapter.notifyDataSetChanged();
+                                atualizarVal();
+
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -142,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
         UtilsGUI.confirmaAcao(this, mensagem, listener);
 
-        atualizarVal();
+
     }
 
 
@@ -171,6 +173,11 @@ public class MainActivity extends AppCompatActivity {
                         itemClasse.getTipo(),
                         REQUEST_ALTERAR_ITEM,
                         itemClasse);
+
+                adapter.notifyDataSetChanged();
+
+                atualizarVal();
+
                 return true;
 
             case R.id.excluir:
@@ -203,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
 
                 intent.putExtra(ItensActivity.KEY_TIPO, tipoItem);
                 ItensActivity.nova(this, tipoItem, REQUEST_NOVO_ITEM);
-                startActivity(intent);
 
                 return true;
 
@@ -212,7 +218,6 @@ public class MainActivity extends AppCompatActivity {
 
                 intent.putExtra(ItensActivity.KEY_TIPO, tipoItem);
                 ItensActivity.nova(this, tipoItem, REQUEST_NOVO_ITEM);
-                startActivity(intent);
 
                 return true;
 

@@ -27,10 +27,6 @@ public class Item {
 
     }
 
-    public Item(String s) {
-
-    }
-
 
     public Long getAno() {
         return ano;
