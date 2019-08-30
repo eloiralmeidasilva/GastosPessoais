@@ -3,14 +3,11 @@ package com.example.gastospessoais;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,13 +16,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.example.gastospessoais.Dao.ItemDao;
 import com.example.gastospessoais.Dao.ItensDataBase;
 import com.example.gastospessoais.Modelo.Item;
-import com.example.gastospessoais.Modelo.Valores;
 import com.example.gastospessoais.Utils.UtilsGUI;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -309,6 +302,10 @@ public class MainActivity extends AppCompatActivity {
                 ItensActivity.nova(this, tipoItem, REQUEST_NOVO_ITEM);
 
                 return true;
+
+            case R.id.menu_sobre:
+                Intent intentSobre = new Intent(this, InformacaoActivity.class);
+                startActivity(intentSobre);
 
             default:
                 return super.onOptionsItemSelected(item);

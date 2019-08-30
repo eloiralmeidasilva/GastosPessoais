@@ -24,4 +24,5 @@
     <string name="semTipo">Without type</string>
     <string name="sim">Yes</string>
     <string name="valor">Value</string>
+    <string name="menu_sobre">Informações</string>
 </resources>

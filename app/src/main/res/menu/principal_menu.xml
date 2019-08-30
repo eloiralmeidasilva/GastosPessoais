@@ -3,10 +3,13 @@
 
     <item
         android:id="@+id/menuReceitas"
-        android:icon="@mipmap/ic_launcher_foreground"
+        android:icon="@android:drawable/ic_input_add"
         android:title="@string/menu_receitas" />
     <item
         android:id="@+id/menuGastos"
         android:icon="@mipmap/ic_launcher"
         android:title="@string/menu_gastos" />
+    <item
+        android:id="@+id/menu_sobre"
+        android:title="@string/menu_sobre" />
 </menu>
