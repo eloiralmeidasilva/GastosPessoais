@@ -136,8 +136,6 @@ public class ItemDao {
                 ID + " = ?",
                 args);
 
-
-
         return true;
     }
 

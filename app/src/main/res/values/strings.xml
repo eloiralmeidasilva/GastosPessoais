@@ -2,7 +2,7 @@
     <string name="app_name">GastosPessoais</string>
     <string name="ok">OK</string>
     <string name="nao">Not</string>
-    <string name="alterar_item">Change</string>
+    <string name="alterar_item">"Change "</string>
     <string name="aviso">Notice</string>
     <string name="cancelar">Cancel</string>
     <string name="categoria">Category</string>
@@ -18,7 +18,7 @@
     <string name="menu_excluir">delete</string>
     <string name="menu_gastos">Spending</string>
     <string name="menu_receitas">Revenue</string>
-    <string name="novo_item">New</string>
+    <string name="novo_item">"New "</string>
     <string name="receita">Recipe</string>
     <string name="salvar">To save</string>
     <string name="semTipo">Without type</string>

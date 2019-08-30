@@ -3,8 +3,10 @@
 
     <item
         android:id="@+id/alterar"
+        android:icon="@android:drawable/ic_menu_edit"
         android:title="@string/menu_alterar" />
     <item
         android:id="@+id/excluir"
+        android:icon="@android:drawable/ic_menu_delete"
         android:title="@string/menu_excluir" />
 </menu>

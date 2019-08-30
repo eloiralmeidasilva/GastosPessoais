@@ -1,11 +1,13 @@
 package com.example.gastospessoais;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -71,6 +73,10 @@ public class ItensActivity extends AppCompatActivity {
         editTextData.addTextChangedListener(MascaraEdicao.mask(editTextData, MascaraEdicao.FORMAT_DATE));
         editTextCategoria = findViewById(R.id.editTextCategoria);
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -156,18 +162,38 @@ public class ItensActivity extends AppCompatActivity {
         }
 
         setResult(Activity.RESULT_OK);
-        finish();
-
-    }
-
-
-
-
-
-    public void voltar(View view){
 
         finish();
 
     }
+
+
+
+    private void voltar(){
+        setResult(Activity.RESULT_CANCELED);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        voltar();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+
+            case android.R.id.home:
+
+                voltar();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 
 }
